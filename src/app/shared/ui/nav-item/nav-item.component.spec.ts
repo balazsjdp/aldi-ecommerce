@@ -9,7 +9,7 @@ describe('NavItemComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [NavItemComponent],
-      providers: [provideRouter([])]
+      providers: [provideRouter([])],
     }).compileComponents();
 
     fixture = TestBed.createComponent(NavItemComponent);

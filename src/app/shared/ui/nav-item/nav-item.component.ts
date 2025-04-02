@@ -10,9 +10,9 @@ const UNKNOWN_ROUTE = 'UNKNOWN_ROUTE';
   template: `
     <a
       [routerLink]="routerLink"
-      routerLinkActive="bg-gray-800 text-white"
+      routerLinkActive="bg-indigo-950 text-white"
       [routerLinkActiveOptions]="{ exact: true }"
-      class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">
+      class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-indigo-900 hover:text-white">
       {{ label }}
     </a>
   `,

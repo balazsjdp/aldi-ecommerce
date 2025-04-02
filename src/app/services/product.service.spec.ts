@@ -1,5 +1,8 @@
 import { TestBed } from '@angular/core/testing';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import {
+  HttpClientTestingModule,
+  HttpTestingController,
+} from '@angular/common/http/testing';
 import { ProductService } from './product.service';
 import Product from '../shared/interfaces/product.interface';
 
@@ -8,14 +11,28 @@ describe('ProductService', () => {
   let httpMock: HttpTestingController;
 
   const mockProducts: Product[] = [
-    { id: '1', name: 'Orange', price: 100, minOrderAmount: 1, img: '', availableAmount: 10 },
-    { id: '2', name: 'Smartwatch', price: 29990, minOrderAmount: 1, img: '', availableAmount: 25 }
+    {
+      id: '1',
+      name: 'Orange',
+      price: 100,
+      minOrderAmount: 1,
+      img: '',
+      availableAmount: 10,
+    },
+    {
+      id: '2',
+      name: 'Smartwatch',
+      price: 29990,
+      minOrderAmount: 1,
+      img: '',
+      availableAmount: 25,
+    },
   ];
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      providers: [ProductService]
+      providers: [ProductService],
     });
 
     service = TestBed.inject(ProductService);
@@ -36,7 +53,9 @@ describe('ProductService', () => {
       expect(products).toEqual(mockProducts);
     });
 
-    const req = httpMock.expectOne('https://63c10327716562671870f959.mockapi.io/products');
+    const req = httpMock.expectOne(
+      'https://63c10327716562671870f959.mockapi.io/products'
+    );
     expect(req.request.method).toBe('GET');
     req.flush(mockProducts); // Respond with mock data
   });
@@ -48,7 +67,9 @@ describe('ProductService', () => {
       expect(product).toEqual(mockProduct);
     });
 
-    const req = httpMock.expectOne('https://63c10327716562671870f959.mockapi.io/products/1');
+    const req = httpMock.expectOne(
+      'https://63c10327716562671870f959.mockapi.io/products/1'
+    );
     expect(req.request.method).toBe('GET');
     req.flush(mockProduct);
   });

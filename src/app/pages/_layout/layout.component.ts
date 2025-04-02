@@ -6,8 +6,10 @@ import {
   RouterOutlet,
 } from '@angular/router';
 import NavItem from '../../shared/interfaces/nav-item.interface';
-import { NavItemComponent } from '../../components/ui/nav-item/nav-item.component';
+import { NavItemComponent } from '../../shared/ui/nav-item/nav-item.component';
 import { filter } from 'rxjs/operators';
+
+const NOT_FOUND = 'Not Found';
 @Component({
   selector: 'app-layout',
   standalone: true,
@@ -25,7 +27,7 @@ export class LayoutComponent {
       .subscribe(() => {
         this.pageTitle.set(
           this.navigationItems.find(i => i.routerLink === this._router.url)
-            ?.label ?? 'UNKNOWN PAGE'
+            ?.label ?? NOT_FOUND
         );
       });
   }

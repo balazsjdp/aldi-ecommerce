@@ -11,13 +11,13 @@ export const routes: Routes = [
       { path: 'products', component: ProductListComponent },
       { path: 'cart', component: CartComponent },
       { path: '', redirectTo: 'products', pathMatch: 'full' },
+      {
+        path: '**',
+        loadComponent: () =>
+          import('./pages/_static/not-found/not-found.component').then(
+            m => m.NotFoundComponent
+          ),
+      },
     ],
-  },
-  {
-    path: '**',
-    loadComponent: () =>
-      import('./pages/_static/not-found/not-found.component').then(
-        m => m.NotFoundComponent
-      ),
   },
 ];

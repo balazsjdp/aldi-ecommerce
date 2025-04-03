@@ -86,14 +86,11 @@ export class ProductCardComponent {
   }
 
   constructor() {
-    effect(
-      () => {
-        // TODO: Update this so the min amount is calculated with the cart amount too
-        const min = this.productData().minOrderAmount || 1;
-        this.quantity.set(min);
-      },
-      { allowSignalWrites: true }
-    );
+    effect(() => {
+      // TODO: Update this so the min amount is calculated with the cart amount too
+      const min = this.productData().minOrderAmount || 1;
+      this.quantity.set(min);
+    });
   }
 
   onQuantityInput(event: Event) {

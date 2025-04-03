@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { selectCartItems } from '../../store/cart/cart.selectors';
-import { CartItemRowComponent } from "../../components/cart-item-row/cart-item-row.component";
+import { CartItemRowComponent } from '../../components/cart-item-row/cart-item-row.component';
 
 @Component({
   selector: 'app-cart',
@@ -13,8 +13,5 @@ import { CartItemRowComponent } from "../../components/cart-item-row/cart-item-r
 export class CartComponent {
   private _store = inject(Store);
 
-
   cartItems = this._store.selectSignal(selectCartItems);
-
-
 }

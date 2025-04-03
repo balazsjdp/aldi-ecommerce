@@ -1,10 +1,25 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import Product from '../../shared/interfaces/product.interface';
+import { StockState } from './interfaces/stock-state.interface';
 
-export const selectStock = createFeatureSelector<Product[]>('stock');
+export const selectStockState = createFeatureSelector<StockState>('stock');
+
+export const selectStock = createSelector(
+  selectStockState,
+  state => state.products
+);
+
+export const selectStockLoading = createSelector(
+  selectStockState,
+  state => state.loading
+);
+
+export const selectStockError = createSelector(
+  selectStockState,
+  state => state.error
+);
 
 export const selectRemainingAmount = (productId: string) =>
   createSelector(
-    selectStock,
-    products => products.find(p => p.id === productId)?.availableAmount ?? 0
+    selectStockState,
+    state => state.products.find(p => p.id === productId)?.availableAmount ?? 0
   );

@@ -8,6 +8,11 @@ export const loadProductsSuccess = createAction(
   props<{ products: Product[] }>()
 );
 
+export const loadProductsFail = createAction(
+  '[Stock] Load Products Fail',
+  props<{ error: Error }>()
+);
+
 export const decrementProductStock = createAction(
   '[Stock] Decrement Product Stock',
   props<{ productId: string; quantity: number }>()

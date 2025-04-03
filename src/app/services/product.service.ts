@@ -19,7 +19,7 @@ export class ProductService {
       .get<Product[]>(this.apiUrl)
       .pipe(
         map((products: Product[]) =>
-          products.map((p: Product) => ProductUtils.productWithUid(p))
+          products.map((p: Product) => ProductUtils.productWithUid(p)) // The provided API has an ID duplication. Here I assign new unique ids for each product
         )
       );
   }

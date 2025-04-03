@@ -12,6 +12,5 @@ import { CartItemRowComponent } from '../../components/cart-item-row/cart-item-r
 })
 export class CartComponent {
   private _store = inject(Store);
-
   cartItems = this._store.selectSignal(selectCartItems);
 }

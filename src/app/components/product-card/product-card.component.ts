@@ -16,7 +16,6 @@ import { CurrencyPipe } from '@angular/common';
   selector: 'app-product-card',
   standalone: true,
   imports: [CurrencyPipe],
-  styleUrl: './product-card.component.css',
   template: `
     <a class="group block">
       <div class="overflow-hidden">

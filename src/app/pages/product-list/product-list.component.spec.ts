@@ -6,6 +6,8 @@ import {
   provideHttpClient,
   withInterceptorsFromDi,
 } from '@angular/common/http';
+import { provideStore } from '@ngrx/store';
+import { stockReducer } from '../../store/stock/stock.reducer';
 
 describe('ProductListComponent', () => {
   let component: ProductListComponent;
@@ -17,6 +19,9 @@ describe('ProductListComponent', () => {
       providers: [
         provideHttpClient(withInterceptorsFromDi()),
         provideHttpClientTesting(),
+        provideStore({
+          stock: stockReducer
+        })
       ],
     }).compileComponents();
 

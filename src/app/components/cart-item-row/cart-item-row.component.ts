@@ -5,7 +5,6 @@ import CartItem from '../../shared/interfaces/cart-item.interface';
   selector: 'app-cart-item-row',
   standalone: true,
   imports: [],
-  styleUrl: './cart-item-row.component.css',
   template: `
     <li class="flex py-6">
       <div
@@ -40,6 +39,5 @@ import CartItem from '../../shared/interfaces/cart-item.interface';
 })
 export class CartItemRowComponent {
   item = input.required<CartItem>();
-
   itemSubTotal = computed(() => this.item().price * this.item().quantity!);
 }

@@ -7,7 +7,7 @@
           <app-product-skeleton />
         }
       } @else {
-        @for (product of products(); track product.id) {
+        @for (product of products$ | async; track product.id) {
           <app-product-card [productData]="product" />
         }
       }

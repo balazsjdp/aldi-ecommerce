@@ -1,6 +1,16 @@
-import { Component, input } from '@angular/core';
-import { CurrencyPipe } from '@angular/common';
+import {
+  Component,
+  computed,
+  effect,
+  inject,
+  input,
+  signal,
+} from '@angular/core';
 import Product from '../../shared/interfaces/product.interface';
+import { Store } from '@ngrx/store';
+import { addToCart } from '../../store/cart/cart.actions';
+import { selectRemainingAmount } from '../../store/stock/stock.selectors';
+import { CurrencyPipe } from '@angular/common';
 
 @Component({
   selector: 'app-product-card',
@@ -11,28 +21,34 @@ import Product from '../../shared/interfaces/product.interface';
     <a class="group block">
       <div class="overflow-hidden">
         <img
-          [src]="productData()?.img"
+          [src]="productData().img"
           (error)="onImageError($event)"
           [alt]="imageAlt"
           class="aspect-square w-full rounded-lg bg-gray-200 object-cover hover:opacity-75 xl:aspect-[7/8] transform hover:scale-125 transition-transform duration-300 peer" />
       </div>
       <h3
         class="mt-4 text-sm text-indigo-800 font-medium leading-tight truncate"
-        [title]="productData()?.name">
-        {{ productData()?.name }}
+        [title]="productData().name">
+        {{ productData().name }}
       </h3>
       <div class="flex justify-between items-end mt-2">
         <p class="text-lg font-light text-gray-900">
-          {{ productData()?.price | currency }}
+          {{ productData().price | currency }}
         </p>
+
         <div class="flex flex-row items-center gap-2">
           <input
             type="number"
-            min="{{ productData()?.minOrderAmount || 1 }}"
-            [value]="productData()?.minOrderAmount || 1"
+            [min]="minOrderAmount"
+            [max]="remainingAmount()"
+            [value]="quantity()"
+            (input)="onQuantityInput($event)"
             class="w-16 rounded border border-gray-300 px-2 py-1 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+
           <button
-            class="rounded bg-indigo-700 px-3 py-1 text-sm font-medium text-white hover:bg-indigo-800 cursor-pointer">
+            class="rounded bg-indigo-700 px-3 py-1 text-sm font-medium text-white hover:bg-indigo-800 disabled:bg-gray-400 disabled:cursor-not-allowed disabled:opacity-70 transition cursor-pointer"
+            [disabled]="remainingAmount() <= 0"
+            (click)="handleAddToCart()">
             Add
           </button>
         </div>
@@ -41,7 +57,20 @@ import Product from '../../shared/interfaces/product.interface';
   `,
 })
 export class ProductCardComponent {
-  productData = input<Product>();
+  private store = inject(Store);
+
+  productData = input.required<Product>();
+  quantity = signal<number>(1);
+  remainingAmount = computed(() => {
+    const productId = this.productData().id;
+    return productId
+      ? this.store.selectSignal(selectRemainingAmount(productId))()
+      : 0;
+  });
+
+  get minOrderAmount(): number {
+    return this.productData().minOrderAmount || 1;
+  }
 
   get fallbackImage(): string {
     const name = this.productData()?.name ?? 'Not Found';
@@ -54,6 +83,38 @@ export class ProductCardComponent {
     return name
       ? `Image of the ${name} product`
       : 'Product image not available';
+  }
+
+  constructor() {
+    effect(
+      () => {
+        // TODO: Update this so the min amount is calculated with the cart amount too
+        const min = this.productData().minOrderAmount || 1;
+        this.quantity.set(min);
+      },
+      { allowSignalWrites: true }
+    );
+  }
+
+  onQuantityInput(event: Event) {
+    const input = event.target as HTMLInputElement;
+    const value = Math.max(this.minOrderAmount, +input.value);
+    this.quantity.set(value);
+  }
+
+  handleAddToCart() {
+    const product = this.productData();
+    if (!product) return;
+
+    const quantityToAdd = Math.min(this.quantity(), this.remainingAmount());
+    if (quantityToAdd <= 0) return;
+
+    this.store.dispatch(
+      addToCart({
+        item: product,
+        quantity: quantityToAdd,
+      })
+    );
   }
 
   onImageError(event: Event) {

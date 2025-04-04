@@ -1,10 +1,11 @@
 import { Component, computed, input } from '@angular/core';
 import CartItem from '../../shared/interfaces/cart-item.interface';
+import { CurrencyPipe } from '@angular/common';
 
 @Component({
   selector: 'app-cart-item-row',
   standalone: true,
-  imports: [],
+  imports: [CurrencyPipe],
   template: `
     <li class="flex py-6">
       <div
@@ -20,7 +21,7 @@ import CartItem from '../../shared/interfaces/cart-item.interface';
             <h3>
               <a href="#">{{ item().name }}</a>
             </h3>
-            <p class="ml-4">{{ itemSubTotal() }}</p>
+            <p class="ml-4">{{ itemSubTotal() | currency }}</p>
           </div>
         </div>
         <div class="flex flex-1 items-end justify-between text-sm">

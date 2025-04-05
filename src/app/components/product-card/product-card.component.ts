@@ -36,19 +36,19 @@ export class ProductCardComponent {
 
   /* Signals */
 
-  productData = input.required<Product>();
+  product = input.required<Product>();
   // Holds the value of the quantity will be put in the cart
   quantity = signal<number>(1);
   // The remaining stock amount of the product
   remainingAmount = computed(() => {
-    const productId = this.productData().id;
+    const productId = this.product().id;
     return productId
       ? this._store.selectSignal(selectRemainingAmount(productId))()
       : 0;
   });
   // The quantity of the current product in the cart
   cartItemQuantity = computed(() => {
-    const productId = this.productData().id;
+    const productId = this.product().id;
     return productId
       ? (this._store.selectSignal(selectCartItemById(productId))()?.quantity ??
           0)
@@ -56,21 +56,20 @@ export class ProductCardComponent {
   });
   // The minimum quantity of the current product can be put in the cart
   minOrderAmount = computed(() =>
-    this.cartItemQuantity() >= this.productData().minOrderAmount
+    this.cartItemQuantity() >= this.product().minOrderAmount
       ? 1
-      : this.productData().minOrderAmount || 1
+      : this.product().minOrderAmount || 1
   );
 
   /* Event handlers */
 
   onQuantityInput(event: Event) {
     const input = event.target as HTMLInputElement;
-    const value = Math.max(this.minOrderAmount(), +input.value);
-    this.quantity.set(value);
+    this.quantity.set(this.sanitizeQuantityInput(+input.value));
   }
 
   handleAddToCart() {
-    const product = this.productData();
+    const product = this.product();
     if (!product) return;
 
     const quantityToAdd = Math.min(this.quantity(), this.remainingAmount());
@@ -90,5 +89,10 @@ export class ProductCardComponent {
         quantity: quantityToAdd,
       })
     );
+  }
+
+  /* Private methods */
+  private sanitizeQuantityInput(value: number): number {
+    return Math.max(this.minOrderAmount(), value);
   }
 }

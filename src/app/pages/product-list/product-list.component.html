@@ -10,7 +10,7 @@
         @for (product of products(); track product.id) {
           <app-product-card
             [appOutOfStockOverlay]="product.id"
-            [productData]="product" />
+            [product]="product" />
         }
       }
     </div>

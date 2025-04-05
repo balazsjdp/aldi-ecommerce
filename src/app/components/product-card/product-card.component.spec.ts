@@ -47,7 +47,7 @@ describe('ProductCardComponent', () => {
     component = fixture.componentInstance;
     mockStore = TestBed.inject(MockStore);
 
-    fixture.componentRef.setInput('productData', productMock);
+    fixture.componentRef.setInput('product', productMock);
 
     fixture.detectChanges();
   });

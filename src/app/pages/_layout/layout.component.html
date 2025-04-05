@@ -6,8 +6,9 @@
           <div class="shrink-0">
             <img
               class="size-18"
+              routerLink="/"
               src="assets/img/aldi-webshop-logo-colorful.png"
-              alt="Your Company" />
+              alt="Aldi Webshop" />
           </div>
           <div class="hidden md:block">
             <div class="ml-10 flex items-baseline space-x-4">
@@ -19,20 +20,7 @@
             </div>
           </div>
         </div>
-        <div class="hidden md:block">
-          <div class="ml-4 flex items-center md:ml-6">
-            <button
-              type="button"
-              routerLink="/cart"
-              class="relative rounded-full bg-indigo-950 p-1 text-gray-400 hover:text-white cursor-pointer">
-              <app-icon-cart class="size-6" />
-              <div
-                class="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-sky-500 border-2 border-white rounded-full -top-2 -end-2 dark:border-gray-900">
-                {{ cartItemsCount() }}
-              </div>
-            </button>
-          </div>
-        </div>
+        <app-cart-indicator />
       </div>
     </div>
   </nav>

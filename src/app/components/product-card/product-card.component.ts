@@ -12,7 +12,7 @@ import { addToCart } from '../../store/cart/cart.actions';
 import { selectRemainingAmount } from '../../store/stock/stock.selectors';
 import { selectCartItemById } from '../../store/cart/cart.selectors';
 import { ToastrService } from 'ngx-toastr';
-import { HufPipe } from '../../shared/pipes/huf.pipe';
+import { HufPipe } from '../../shared/pipes/huf/huf.pipe';
 import { ProductFallbackImageDirective } from '../../shared/directives/product-fallback-image.directive';
 
 @Component({

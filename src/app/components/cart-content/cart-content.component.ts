@@ -6,7 +6,7 @@ import {
 } from '../../store/cart/cart.selectors';
 import { CartItemRowComponent } from '../cart-item-row/cart-item-row.component';
 import { RouterModule } from '@angular/router';
-import { HufPipe } from '../../shared/pipes/huf.pipe';
+import { HufPipe } from '../../shared/pipes/huf/huf.pipe';
 
 @Component({
   selector: 'app-cart-content',

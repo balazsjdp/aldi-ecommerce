@@ -2,7 +2,7 @@ import { Component, computed, inject, input } from '@angular/core';
 import CartItem from '../../shared/interfaces/cart-item.interface';
 import { Store } from '@ngrx/store';
 import { removeFromCart } from '../../store/cart/cart.actions';
-import { HufPipe } from '../../shared/pipes/huf.pipe';
+import { HufPipe } from '../../shared/pipes/huf/huf.pipe';
 import { ProductFallbackImageDirective } from '../../shared/directives/product-fallback-image.directive';
 
 @Component({

@@ -21,5 +21,6 @@ export const selectStockError = createSelector(
 export const selectRemainingAmount = (productId: string) =>
   createSelector(
     selectStockState,
-    state => state.products.find(p => p.id === productId)?.availableAmount ?? 0
+    state =>
+      state?.products?.find(p => p.id === productId)?.availableAmount ?? 0
   );

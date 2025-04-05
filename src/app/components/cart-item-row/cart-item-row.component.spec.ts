@@ -35,6 +35,10 @@ describe('CartContentComponent', () => {
     store = TestBed.inject(MockStore);
   });
 
+  it('should create the component', () => {
+    expect(component).toBeTruthy();
+  });
+
   it('should initialize cartItems with the value from selectCartItems', () => {
     const mockCartItems: CartItem[] = [
       {

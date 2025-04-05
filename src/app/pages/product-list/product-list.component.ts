@@ -18,7 +18,6 @@ import { OutOfStockOverlayDirective } from '../../shared/directives/out-of-stock
     OutOfStockOverlayDirective,
   ],
   templateUrl: './product-list.component.html',
-  styleUrl: './product-list.component.css',
 })
 export class ProductListComponent {
   private _store = inject(Store);

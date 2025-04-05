@@ -7,6 +7,10 @@ describe('HufPipe', () => {
     pipe = new HufPipe();
   });
 
+  it('should create the pipe', () => {
+    expect(pipe).toBeTruthy();
+  });
+
   it('should format a valid number correctly', () => {
     expect(pipe.transform(1234)).toBe('12 340 Ft');
   });

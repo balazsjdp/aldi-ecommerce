@@ -17,19 +17,19 @@ describe('ProductService', () => {
   const mockProducts: Product[] = [
     {
       id: '1',
-      name: 'Orange',
+      name: 'Test Product',
       price: 100,
-      minOrderAmount: 1,
       img: '',
-      availableAmount: 10,
+      availableAmount: 50,
+      minOrderAmount: 10,
     },
     {
       id: '2',
-      name: 'Smartwatch',
-      price: 29990,
-      minOrderAmount: 1,
+      name: 'Test Product 2',
+      price: 100,
       img: '',
-      availableAmount: 25,
+      availableAmount: 50,
+      minOrderAmount: 10,
     },
   ];
 

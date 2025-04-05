@@ -28,6 +28,10 @@ describe('CartComponent', () => {
     store.overrideSelector(selectCartTotalPrice, 0);
   });
 
+  it('should create the component', () => {
+    expect(component).toBeTruthy();
+  });
+
   it('should initialize cartItemQuantity with the value from selectCartTotalQuantity', () => {
     store.overrideSelector(selectCartTotalQuantity, 5);
     fixture.detectChanges();

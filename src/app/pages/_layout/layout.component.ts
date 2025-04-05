@@ -25,7 +25,7 @@ const NOT_FOUND = 'Not Found';
 })
 export class LayoutComponent {
   private _router = inject(Router);
-  protected pageTitle = signal<string>('');
+  pageTitle = signal<string>('');
 
   constructor() {
     this._router.events

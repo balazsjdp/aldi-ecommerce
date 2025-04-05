@@ -29,18 +29,18 @@ describe('ProductListComponent', () => {
     {
       id: '1',
       name: 'Test Product',
-      img: '',
-      availableAmount: 31,
-      minOrderAmount: 10,
-      price: 50,
-    },
-    {
-      id: '1',
-      name: 'Test Product 2',
+      price: 100,
       img: '',
       availableAmount: 50,
       minOrderAmount: 10,
-      price: 50,
+    },
+    {
+      id: '1',
+      name: 'Test Product',
+      price: 100,
+      img: '',
+      availableAmount: 50,
+      minOrderAmount: 10,
     },
   ];
 
@@ -58,6 +58,10 @@ describe('ProductListComponent', () => {
     store.overrideSelector(selectStockLoading, false);
 
     store.overrideSelector(selectCartItems, []);
+  });
+
+  it('should create the component', () => {
+    expect(component).toBeTruthy();
   });
 
   it('should dispatch loadProducts if products are not loaded', () => {

@@ -9,19 +9,7 @@ import { CartContentComponent } from '../../components/cart-content/cart-content
   selector: 'app-cart',
   standalone: true,
   imports: [RouterModule, CartEmptyComponent, CartContentComponent],
-  styleUrl: './cart.component.css',
-  template: `
-    <div class="bg-white">
-      <div
-        class="mx-auto max-w-2xl px-4 py-8 sm:px-6 sm:py-8 lg:max-w-7xl lg:px-8">
-        @if (cartItemQuantity() === 0) {
-          <app-cart-empty />
-        } @else {
-          <app-cart-content />
-        }
-      </div>
-    </div>
-  `,
+  templateUrl: './cart.component.html',
 })
 export class CartComponent {
   private _store = inject(Store);

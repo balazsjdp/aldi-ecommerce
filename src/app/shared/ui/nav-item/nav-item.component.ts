@@ -7,15 +7,7 @@ const UNKNOWN_ROUTE = 'UNKNOWN_ROUTE';
   selector: 'app-nav-item',
   standalone: true,
   imports: [RouterModule, RouterLinkActive],
-  template: `
-    <a
-      [routerLink]="routerLink"
-      routerLinkActive="bg-indigo-950 text-white"
-      [routerLinkActiveOptions]="{ exact: true }"
-      class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-indigo-900 hover:text-white">
-      {{ label }}
-    </a>
-  `,
+  templateUrl: './nav-item.component.html',
 })
 export class NavItemComponent {
   @Input({ required: true }) routerLink!: string;

@@ -10,15 +10,19 @@ import Product from '../../shared/interfaces/product.interface';
 import { Store } from '@ngrx/store';
 import { addToCart } from '../../store/cart/cart.actions';
 import { selectRemainingAmount } from '../../store/stock/stock.selectors';
-import { CurrencyPipe } from '@angular/common';
 import { selectCartItemById } from '../../store/cart/cart.selectors';
 import { ToastrService } from 'ngx-toastr';
+import { HufPipe } from '../../shared/pipes/huf.pipe';
+import { ProductFallbackImageDirective } from '../../shared/directives/product-fallback-image.directive';
 
 @Component({
   selector: 'app-product-card',
   standalone: true,
-  imports: [CurrencyPipe],
+  imports: [HufPipe, ProductFallbackImageDirective],
   templateUrl: './product-card.component.html',
+  host: {
+    class: 'relative',
+  },
 })
 export class ProductCardComponent {
   private _store = inject(Store);
@@ -57,20 +61,6 @@ export class ProductCardComponent {
       : this.productData().minOrderAmount || 1
   );
 
-  /* Getters */
-
-  get fallbackImage(): string {
-    const name = this.productData()?.name ?? 'Not Found';
-    return `https://placehold.co/700x800/e0e7ff/FFF?text=${encodeURIComponent(name)}&font=roboto`;
-  }
-
-  get imageAlt(): string {
-    const name = this.productData()?.name;
-    return name
-      ? `Image of the ${name} product`
-      : 'Product image not available';
-  }
-
   /* Event handlers */
 
   onQuantityInput(event: Event) {
@@ -90,7 +80,7 @@ export class ProductCardComponent {
       this._toaster.info(
         'The amount added was corrected as it exceeded the currently available amount',
         'Information',
-        { timeOut: 60000 }
+        { timeOut: 2000 }
       );
     }
 
@@ -100,10 +90,5 @@ export class ProductCardComponent {
         quantity: quantityToAdd,
       })
     );
-  }
-
-  onImageError(event: Event) {
-    const target = event.target as HTMLImageElement;
-    target.src = this.fallbackImage;
   }
 }

@@ -2,6 +2,7 @@
   <div
     class="size-24 shrink-0 overflow-hidden rounded-md border border-gray-200">
     <img
+      [appFallbackImage]="item().name"
       src="{{ item().img }}"
       alt="{{ item().name }} image"
       class="size-full object-cover" />
@@ -9,10 +10,10 @@
   <div class="ml-4 flex flex-1 flex-col">
     <div>
       <div class="flex justify-between text-base font-medium text-gray-900">
-        <h3>
-          <a href="#">{{ item().name }}</a>
+        <h3 class="text-sm text-indigo-800 font-medium leading-tight truncate">
+          {{ item().name }}
         </h3>
-        <p class="ml-4">{{ itemSubTotal() | currency }}</p>
+        <p class="ml-4">{{ itemSubTotal() | huf }}</p>
       </div>
     </div>
     <div class="flex flex-1 items-end justify-between text-sm">

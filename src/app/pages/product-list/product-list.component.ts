@@ -7,11 +7,16 @@ import {
   selectStock,
   selectStockLoading,
 } from '../../store/stock/stock.selectors';
+import { OutOfStockOverlayDirective } from '../../shared/directives/out-of-stock-overlay.directive';
 
 @Component({
   selector: 'app-product-list',
   standalone: true,
-  imports: [ProductCardComponent, ProductSkeletonComponent],
+  imports: [
+    ProductCardComponent,
+    ProductSkeletonComponent,
+    OutOfStockOverlayDirective,
+  ],
   templateUrl: './product-list.component.html',
   styleUrl: './product-list.component.css',
 })

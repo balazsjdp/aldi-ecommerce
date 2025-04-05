@@ -1,16 +1,10 @@
 <a class="group block">
   <div class="overflow-hidden relative">
     <img
+      [appFallbackImage]="productData().name"
       [src]="productData().img"
-      (error)="onImageError($event)"
-      [alt]="imageAlt"
+      alt="{{ productData().name }} image"
       class="aspect-square w-full rounded-lg bg-gray-200 object-cover hover:opacity-75 xl:aspect-[7/8] transform hover:scale-125 transition-transform duration-300 peer" />
-    @if (remainingAmount() <= 0) {
-      <span
-        class="absolute top-2 right-2 bg-indigo-700 text-white text-xs font-semibold px-2 py-1 rounded shadow-md uppercase tracking-wide">
-        Out of Stock
-      </span>
-    }
   </div>
   <h3
     class="mt-4 text-sm text-indigo-800 font-medium leading-tight truncate"
@@ -19,12 +13,13 @@
   </h3>
   <div class="flex justify-between items-end mt-2">
     <p class="text-lg font-light text-gray-900">
-      {{ productData().price | currency }}
+      {{ productData().price | huf }}
     </p>
 
     <div class="flex flex-row items-center gap-2">
       <input
         type="number"
+        [disabled]="remainingAmount() <= 0"
         [min]="minOrderAmount()"
         [max]="remainingAmount()"
         [value]="minOrderAmount()"

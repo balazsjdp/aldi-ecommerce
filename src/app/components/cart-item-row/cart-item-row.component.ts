@@ -1,13 +1,14 @@
 import { Component, computed, inject, input } from '@angular/core';
 import CartItem from '../../shared/interfaces/cart-item.interface';
-import { CurrencyPipe } from '@angular/common';
 import { Store } from '@ngrx/store';
 import { removeFromCart } from '../../store/cart/cart.actions';
+import { HufPipe } from '../../shared/pipes/huf.pipe';
+import { ProductFallbackImageDirective } from '../../shared/directives/product-fallback-image.directive';
 
 @Component({
   selector: 'app-cart-item-row',
   standalone: true,
-  imports: [CurrencyPipe],
+  imports: [HufPipe, ProductFallbackImageDirective],
   templateUrl: './cart-item-row.component.html',
 })
 export class CartItemRowComponent {

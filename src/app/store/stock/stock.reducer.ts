@@ -4,7 +4,7 @@ import {
   loadProductsFail,
   loadProductsSuccess,
 } from './stock.actions';
-import { addToCart } from '../cart/cart.actions';
+import { addToCart, removeFromCart } from '../cart/cart.actions';
 import { StockState } from './interfaces/stock-state.interface';
 
 export const initialState: StockState = {
@@ -47,5 +47,17 @@ export const stockReducer = createReducer(
     ),
     loading: false,
     error: null,
+  })),
+
+  on(removeFromCart, (state, { id, quantity }) => ({
+    ...state,
+    products: state.products.map(p =>
+      p.id === id
+        ? {
+            ...p,
+            availableAmount: p.availableAmount + quantity,
+          }
+        : p
+    ),
   }))
 );

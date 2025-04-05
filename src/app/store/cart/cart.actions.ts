@@ -11,5 +11,5 @@ export const addToCart = createAction(
 
 export const removeFromCart = createAction(
   '[Cart] Remove From Cart',
-  props<{ id: string }>()
+  props<{ id: string; quantity: number }>()
 );

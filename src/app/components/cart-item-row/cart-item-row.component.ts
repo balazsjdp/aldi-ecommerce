@@ -16,6 +16,8 @@ export class CartItemRowComponent {
   itemSubTotal = computed(() => this.item().price * this.item().quantity!);
 
   handleRemoveFromCart() {
-    this._store.dispatch(removeFromCart({ id: this.item().id }));
+    this._store.dispatch(
+      removeFromCart({ id: this.item().id, quantity: this.item().quantity! })
+    );
   }
 }

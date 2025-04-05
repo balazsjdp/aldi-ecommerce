@@ -1,10 +1,16 @@
 <a class="group block">
-  <div class="overflow-hidden">
+  <div class="overflow-hidden relative">
     <img
       [src]="productData().img"
       (error)="onImageError($event)"
       [alt]="imageAlt"
       class="aspect-square w-full rounded-lg bg-gray-200 object-cover hover:opacity-75 xl:aspect-[7/8] transform hover:scale-125 transition-transform duration-300 peer" />
+    @if (remainingAmount() <= 0) {
+      <span
+        class="absolute top-2 right-2 bg-indigo-700 text-white text-xs font-semibold px-2 py-1 rounded shadow-md uppercase tracking-wide">
+        Out of Stock
+      </span>
+    }
   </div>
   <h3
     class="mt-4 text-sm text-indigo-800 font-medium leading-tight truncate"

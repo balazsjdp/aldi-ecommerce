@@ -12,6 +12,7 @@ import { addToCart } from '../../store/cart/cart.actions';
 import { selectRemainingAmount } from '../../store/stock/stock.selectors';
 import { CurrencyPipe } from '@angular/common';
 import { selectCartItemById } from '../../store/cart/cart.selectors';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-product-card',
@@ -20,11 +21,12 @@ import { selectCartItemById } from '../../store/cart/cart.selectors';
   templateUrl: './product-card.component.html',
 })
 export class ProductCardComponent {
-  private store = inject(Store);
+  private _store = inject(Store);
+  private _toaster = inject(ToastrService);
 
   constructor() {
     effect(() => {
-      this.quantity.set(this.productData().minOrderAmount);
+      this.quantity.set(this.minOrderAmount());
     });
   }
 
@@ -37,14 +39,14 @@ export class ProductCardComponent {
   remainingAmount = computed(() => {
     const productId = this.productData().id;
     return productId
-      ? this.store.selectSignal(selectRemainingAmount(productId))()
+      ? this._store.selectSignal(selectRemainingAmount(productId))()
       : 0;
   });
   // The quantity of the current product in the cart
   cartItemQuantity = computed(() => {
     const productId = this.productData().id;
     return productId
-      ? (this.store.selectSignal(selectCartItemById(productId))()?.quantity ??
+      ? (this._store.selectSignal(selectCartItemById(productId))()?.quantity ??
           0)
       : 0;
   });
@@ -84,7 +86,15 @@ export class ProductCardComponent {
     const quantityToAdd = Math.min(this.quantity(), this.remainingAmount());
     if (quantityToAdd <= 0) return;
 
-    this.store.dispatch(
+    if (this.quantity() > this.remainingAmount()) {
+      this._toaster.info(
+        'The amount added was corrected as it exceeded the currently available amount',
+        'Information',
+        { timeOut: 60000 }
+      );
+    }
+
+    this._store.dispatch(
       addToCart({
         item: product,
         quantity: quantityToAdd,

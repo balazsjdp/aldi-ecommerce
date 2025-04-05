@@ -20,8 +20,8 @@ describe('ProductListComponent', () => {
         provideHttpClient(withInterceptorsFromDi()),
         provideHttpClientTesting(),
         provideStore({
-          stock: stockReducer
-        })
+          stock: stockReducer,
+        }),
       ],
     }).compileComponents();
 

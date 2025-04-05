@@ -11,7 +11,7 @@ describe('CartItemRowComponent', () => {
     name: 'Test Product',
     img: 'https://via.placeholder.com/100',
     price: 500,
-    quantity: 2
+    quantity: 2,
   };
 
   beforeEach(async () => {
@@ -23,7 +23,6 @@ describe('CartItemRowComponent', () => {
     component = fixture.componentInstance;
     fixture.componentRef.setInput('item', mockItem);
     fixture.detectChanges();
-    
   });
 
   it('should create', () => {

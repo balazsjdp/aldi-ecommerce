@@ -11,6 +11,7 @@ import { Store } from '@ngrx/store';
 import { addToCart } from '../../store/cart/cart.actions';
 import { selectRemainingAmount } from '../../store/stock/stock.selectors';
 import { CurrencyPipe } from '@angular/common';
+import { selectCartItemById } from '../../store/cart/cart.selectors';
 
 @Component({
   selector: 'app-product-card',
@@ -38,14 +39,14 @@ import { CurrencyPipe } from '@angular/common';
         <div class="flex flex-row items-center gap-2">
           <input
             type="number"
-            [min]="minOrderAmount"
+            [min]="minOrderAmount()"
             [max]="remainingAmount()"
-            [value]="quantity()"
+            [value]="minOrderAmount()"
             (input)="onQuantityInput($event)"
             class="w-16 rounded border border-gray-300 px-2 py-1 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500" />
 
           <button
-            class="rounded bg-indigo-700 px-3 py-1 text-sm font-medium text-white hover:bg-indigo-800 disabled:bg-gray-400 disabled:cursor-not-allowed disabled:opacity-70 transition cursor-pointer"
+            class="rounded shop-button px-3 py-1 text-sm font-medium text-white disabled:bg-gray-400 disabled:cursor-not-allowed disabled:opacity-70 transition cursor-pointer"
             [disabled]="remainingAmount() <= 0"
             (click)="handleAddToCart()">
             Add
@@ -58,23 +59,44 @@ import { CurrencyPipe } from '@angular/common';
 export class ProductCardComponent {
   private store = inject(Store);
 
+  constructor() {
+    effect(() => {
+      this.quantity.set(this.productData().minOrderAmount);
+    });
+  }
+
+  /* Signals */
+  
   productData = input.required<Product>();
+  // Holds the value of the quantity will be put in the cart
   quantity = signal<number>(1);
+  // The remaining stock amount of the product
   remainingAmount = computed(() => {
     const productId = this.productData().id;
     return productId
       ? this.store.selectSignal(selectRemainingAmount(productId))()
       : 0;
   });
+  // The quantity of the current product in the cart
+  cartItemQuantity = computed(() => {
+    const productId = this.productData().id;
+    return productId
+      ? (this.store.selectSignal(selectCartItemById(productId))()?.quantity ??
+          0)
+      : 0;
+  });
+  // The minimum quantity of the current product can be put in the cart
+  minOrderAmount = computed(() =>
+    this.cartItemQuantity() >= this.productData().minOrderAmount
+      ? 1
+      : this.productData().minOrderAmount || 1
+  );
 
-  get minOrderAmount(): number {
-    return this.productData().minOrderAmount || 1;
-  }
+  /* Getters */
 
   get fallbackImage(): string {
     const name = this.productData()?.name ?? 'Not Found';
-    const encoded = encodeURIComponent(name);
-    return `https://placehold.co/700x800/e0e7ff/FFF?text=${encoded}&font=roboto`;
+    return `https://placehold.co/700x800/e0e7ff/FFF?text=${encodeURIComponent(name)}&font=roboto`;
   }
 
   get imageAlt(): string {
@@ -84,17 +106,11 @@ export class ProductCardComponent {
       : 'Product image not available';
   }
 
-  constructor() {
-    effect(() => {
-      // TODO: Update this so the min amount is calculated with the cart amount too
-      const min = this.productData().minOrderAmount || 1;
-      this.quantity.set(min);
-    });
-  }
+  /* Event handlers */
 
   onQuantityInput(event: Event) {
     const input = event.target as HTMLInputElement;
-    const value = Math.max(this.minOrderAmount, +input.value);
+    const value = Math.max(this.minOrderAmount(), +input.value);
     this.quantity.set(value);
   }
 

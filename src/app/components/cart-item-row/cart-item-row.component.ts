@@ -1,6 +1,8 @@
-import { Component, computed, input } from '@angular/core';
+import { Component, computed, inject, input } from '@angular/core';
 import CartItem from '../../shared/interfaces/cart-item.interface';
 import { CurrencyPipe } from '@angular/common';
+import { Store } from '@ngrx/store';
+import { removeFromCart } from '../../store/cart/cart.actions';
 
 @Component({
   selector: 'app-cart-item-row',
@@ -12,7 +14,7 @@ import { CurrencyPipe } from '@angular/common';
         class="size-24 shrink-0 overflow-hidden rounded-md border border-gray-200">
         <img
           src="{{ item().img }}"
-          alt="Salmon orange fabric pouch with match zipper, gray zipper pull, and adjustable hip belt."
+          alt="{{ item().name }} image"
           class="size-full object-cover" />
       </div>
       <div class="ml-4 flex flex-1 flex-col">
@@ -29,7 +31,8 @@ import { CurrencyPipe } from '@angular/common';
           <div class="flex">
             <button
               type="button"
-              class="font-medium text-indigo-600 hover:text-indigo-500">
+              (click)="handleRemoveFromCart()"
+              class="font-medium text-indigo-600 hover:text-indigo-500 cursor-pointer">
               Remove
             </button>
           </div>
@@ -39,6 +42,11 @@ import { CurrencyPipe } from '@angular/common';
   `,
 })
 export class CartItemRowComponent {
+  private _store = inject(Store);
   item = input.required<CartItem>();
   itemSubTotal = computed(() => this.item().price * this.item().quantity!);
+
+  handleRemoveFromCart() {
+    this._store.dispatch(removeFromCart({ id: this.item().id }));
+  }
 }

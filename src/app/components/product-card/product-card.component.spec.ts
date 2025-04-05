@@ -9,7 +9,7 @@ const mockItem: CartItem = {
   name: 'Test Product',
   img: 'https://via.placeholder.com/100',
   price: 500,
-  quantity: 2
+  quantity: 2,
 };
 
 describe('ProductCardComponent', () => {
@@ -19,9 +19,11 @@ describe('ProductCardComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [ProductCardComponent],
-      providers: [provideStore({
-        stock: stockReducer
-      })]
+      providers: [
+        provideStore({
+          stock: stockReducer,
+        }),
+      ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(ProductCardComponent);

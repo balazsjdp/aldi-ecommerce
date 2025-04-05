@@ -22,11 +22,13 @@ export class ProductListComponent {
   products = this._store.selectSignal(selectStock);
 
   constructor() {
+    // Load the products from the API if they're not yet loaded
     if (!this.productsLoaded) {
       this._store.dispatch(loadProducts());
     }
   }
 
+  // Getter to determine wether the products are already loaded
   get productsLoaded() {
     return this.products().length > 0;
   }

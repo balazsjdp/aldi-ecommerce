@@ -4,3 +4,9 @@
 @theme {
   --font-sans: InterVariable, sans-serif;
 }
+
+@layer components {
+  .shop-button {
+    @apply bg-indigo-700 hover:bg-indigo-800 text-white font-medium transition rounded;
+  }
+}

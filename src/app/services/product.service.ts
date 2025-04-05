@@ -15,13 +15,12 @@ export class ProductService {
   constructor(private http: HttpClient) {}
 
   getProducts(): Observable<Product[]> {
-    return this.http
-      .get<Product[]>(this.apiUrl)
-      .pipe(
-        map((products: Product[]) =>
+    return this.http.get<Product[]>(this.apiUrl).pipe(
+      map(
+        (products: Product[]) =>
           products.map((p: Product) => ProductUtils.productWithUid(p)) // The provided API has an ID duplication. Here I assign new unique ids for each product
-        )
-      );
+      )
+    );
   }
 
   getProductById(id: string): Observable<Product> {

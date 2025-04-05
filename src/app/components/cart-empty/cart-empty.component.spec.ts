@@ -8,9 +8,8 @@ describe('CartEmptyComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [CartEmptyComponent]
-    })
-    .compileComponents();
+      imports: [CartEmptyComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(CartEmptyComponent);
     component = fixture.componentInstance;

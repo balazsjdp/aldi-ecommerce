@@ -7,7 +7,7 @@ export const selectCartItems = createFeatureSelector<CartItem[]>('cart');
 /** Selects a single cart item by product ID */
 export const selectCartItemById = (productId: string) =>
   createSelector(selectCartItems, items =>
-    items.find(i => i.id === productId)
+    items?.find(i => i.id === productId)
   );
 
 /** Selects the total quantity of all items in the cart */

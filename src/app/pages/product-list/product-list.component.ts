@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  inject,
+} from '@angular/core';
 import { ProductCardComponent } from '../../components/product-card/product-card.component';
 import { ProductSkeletonComponent } from '../../shared/ui/product-skeleton/product-skeleton.component';
 import { Store } from '@ngrx/store';
@@ -32,13 +37,10 @@ export class ProductListComponent {
 
   constructor() {
     // Load the products from the API if they're not yet loaded
-    if (!this.productsLoaded) {
+    if (!this.productsLoaded()) {
       this._store.dispatch(loadProducts());
     }
   }
-
-  // Getter to determine wether the products are already loaded
-  get productsLoaded() {
-    return this.products().length > 0;
-  }
+  // A computed signal to check if the products are already loaded
+  productsLoaded = computed(() => this.products().length > 0);
 }

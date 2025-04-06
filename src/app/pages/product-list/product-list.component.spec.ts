@@ -14,7 +14,6 @@ import { By } from '@angular/platform-browser';
 import { ProductCardComponent } from '../../components/product-card/product-card.component';
 
 describe('ProductListComponent', () => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   let component: ProductListComponent;
   let fixture: ComponentFixture<ProductListComponent>;
   let store: MockStore;
@@ -116,6 +115,6 @@ describe('ProductListComponent', () => {
 
     fixture.detectChanges();
 
-    expect(component.productsLoaded).toBeTrue();
+    expect(component.productsLoaded()).toBeTrue();
   });
 });

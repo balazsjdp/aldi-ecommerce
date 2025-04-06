@@ -41,7 +41,6 @@ export class ProductCardComponent {
     });
   }
 
-
   // Holds the value of the product to be displayed
   product = input.required<Product>();
   // Holds the value of the quantity will be put in the cart

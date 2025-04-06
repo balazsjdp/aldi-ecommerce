@@ -1,126 +1,411 @@
-<!DOCTYPE html>
+<!doctype html>
 <head>
   <head>
-    <meta charset="utf-8">
+    <meta charset="utf-8" />
     <style>
-     html, body {
-         padding: 0;
-         margin: 0;
-         width: 100%;
-         height: 100%;
-         overflow: hidden;
-     }
+      html,
+      body {
+        padding: 0;
+        margin: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+      }
 
-     text {
-         font: 12px sans-serif;
-     }
+      text {
+        font: 12px sans-serif;
+      }
 
-     tspan:last-child {
-         font-size: 12px;
-         fill-opacity: 0.8;
-     }
+      tspan:last-child {
+        font-size: 12px;
+        fill-opacity: 0.8;
+      }
 
-     .node rect {
-         shape-rendering: crispEdges;
-     }
+      .node rect {
+        shape-rendering: crispEdges;
+      }
 
-     .node--hover rect {
-         stroke: #000;
-     }
-
+      .node--hover rect {
+        stroke: #000;
+      }
     </style>
     <svg width="100%" height="100%"></svg>
     <script src="http://d3js.org/d3.v4.0.0-alpha.35.min.js"></script>
     <script>
+      var svg = d3.select('svg'),
+        width = window.innerWidth,
+        height = window.innerHeight;
 
-     var svg = d3.select("svg"),
-         width = window.innerWidth,
-         height = window.innerHeight;
+      svg.attr('width', width + 'px');
+      svg.attr('height', height + 'px');
 
-     svg.attr("width", width + "px");
-     svg.attr("height", height + "px");
+      var format = d3.format(',d');
 
-     var format = d3.format(",d");
+      var color = d3.scaleMagma().domain([-4, 4]);
 
-     var color = d3.scaleMagma()
-                   .domain([-4, 4]);
+      var treemap = d3
+        .treemap()
+        .size([width, height])
+        .paddingOuter(3)
+        .paddingTop(19)
+        .paddingInner(1)
+        .round(true);
 
-     var treemap = d3.treemap()
-                     .size([width, height])
-                     .paddingOuter(3)
-                     .paddingTop(19)
-                     .paddingInner(1)
-                     .round(true);
+      var data = {
+        name: '/',
+        children: [
+          {
+            name: 'app',
+            children: [
+              { name: 'app.component.ts', children: [] },
+              { name: 'app.config.server.ts', children: [] },
+              { name: 'app.config.ts', children: [] },
+              { name: 'app.routes.ts', children: [] },
+              {
+                name: 'components',
+                children: [
+                  {
+                    name: 'cart-content',
+                    children: [
+                      { name: 'cart-content.component.html', children: [] },
+                      { name: 'cart-content.component.spec.ts', children: [] },
+                      { name: 'cart-content.component.ts', children: [] },
+                    ],
+                  },
+                  {
+                    name: 'cart-empty',
+                    children: [
+                      { name: 'cart-empty.component.html', children: [] },
+                      { name: 'cart-empty.component.ts', children: [] },
+                    ],
+                  },
+                  {
+                    name: 'cart-indicator',
+                    children: [
+                      { name: 'cart-indicator.component.html', children: [] },
+                      {
+                        name: 'cart-indicator.component.spec.ts',
+                        children: [],
+                      },
+                      { name: 'cart-indicator.component.ts', children: [] },
+                    ],
+                  },
+                  {
+                    name: 'cart-item-row',
+                    children: [
+                      { name: 'cart-item-row.component.html', children: [] },
+                      { name: 'cart-item-row.component.spec.ts', children: [] },
+                      { name: 'cart-item-row.component.ts', children: [] },
+                    ],
+                  },
+                  {
+                    name: 'product-card',
+                    children: [
+                      { name: 'product-card.component.html', children: [] },
+                      { name: 'product-card.component.spec.ts', children: [] },
+                      { name: 'product-card.component.ts', children: [] },
+                    ],
+                  },
+                ],
+              },
+              {
+                name: 'pages',
+                children: [
+                  {
+                    name: '_layout',
+                    children: [
+                      { name: 'layout.component.css', children: [] },
+                      { name: 'layout.component.html', children: [] },
+                      { name: 'layout.component.spec.ts', children: [] },
+                      { name: 'layout.component.ts', children: [] },
+                    ],
+                  },
+                  {
+                    name: '_static',
+                    children: [
+                      {
+                        name: 'not-found',
+                        children: [
+                          { name: 'not-found.component.html', children: [] },
+                          { name: 'not-found.component.ts', children: [] },
+                        ],
+                      },
+                    ],
+                  },
+                  {
+                    name: 'cart',
+                    children: [
+                      { name: 'cart.component.html', children: [] },
+                      { name: 'cart.component.spec.ts', children: [] },
+                      { name: 'cart.component.ts', children: [] },
+                    ],
+                  },
+                  {
+                    name: 'product-list',
+                    children: [
+                      { name: 'product-list.component.html', children: [] },
+                      { name: 'product-list.component.spec.ts', children: [] },
+                      { name: 'product-list.component.ts', children: [] },
+                    ],
+                  },
+                ],
+              },
+              {
+                name: 'services',
+                children: [
+                  { name: 'product.service.spec.ts', children: [] },
+                  { name: 'product.service.ts', children: [] },
+                ],
+              },
+              {
+                name: 'shared',
+                children: [
+                  {
+                    name: 'directives',
+                    children: [
+                      {
+                        name: 'out-of-stock-overlay.directive.ts',
+                        children: [],
+                      },
+                      {
+                        name: 'product-fallback-image.directive.ts',
+                        children: [],
+                      },
+                    ],
+                  },
+                  {
+                    name: 'interfaces',
+                    children: [
+                      { name: 'cart-item.interface.ts', children: [] },
+                      { name: 'nav-item.interface.ts', children: [] },
+                      { name: 'product.interface.ts', children: [] },
+                    ],
+                  },
+                  {
+                    name: 'pipes',
+                    children: [
+                      {
+                        name: 'huf',
+                        children: [
+                          { name: 'huf.pipe.spec.ts', children: [] },
+                          { name: 'huf.pipe.ts', children: [] },
+                        ],
+                      },
+                    ],
+                  },
+                  {
+                    name: 'ui',
+                    children: [
+                      {
+                        name: 'icon-cart',
+                        children: [
+                          { name: 'icon-cart.component.html', children: [] },
+                          { name: 'icon-cart.component.ts', children: [] },
+                        ],
+                      },
+                      {
+                        name: 'nav-item',
+                        children: [
+                          { name: 'nav-item.component.html', children: [] },
+                          { name: 'nav-item.component.spec.ts', children: [] },
+                          { name: 'nav-item.component.ts', children: [] },
+                        ],
+                      },
+                      {
+                        name: 'product-skeleton',
+                        children: [
+                          {
+                            name: 'product-skeleton.component.htm',
+                            children: [],
+                          },
+                          {
+                            name: 'product-skeleton.component.ts',
+                            children: [],
+                          },
+                        ],
+                      },
+                    ],
+                  },
+                  {
+                    name: 'utils',
+                    children: [
+                      { name: 'product-utils.spec.ts', children: [] },
+                      { name: 'product.utils.ts', children: [] },
+                    ],
+                  },
+                ],
+              },
+              {
+                name: 'store',
+                children: [
+                  {
+                    name: 'cart',
+                    children: [
+                      { name: 'cart.actions.ts', children: [] },
+                      { name: 'cart.reducer.ts', children: [] },
+                      { name: 'cart.selectors.ts', children: [] },
+                    ],
+                  },
+                  { name: 'index.ts', children: [] },
+                  {
+                    name: 'stock',
+                    children: [
+                      {
+                        name: 'interfaces',
+                        children: [
+                          { name: 'stock-state.interface.ts', children: [] },
+                        ],
+                      },
+                      { name: 'stock.actions.ts', children: [] },
+                      { name: 'stock.effects.ts', children: [] },
+                      { name: 'stock.reducer.ts', children: [] },
+                      { name: 'stock.selectors.ts', children: [] },
+                    ],
+                  },
+                ],
+              },
+            ],
+          },
+          {
+            name: 'assets',
+            children: [
+              { name: '.gitkeep', children: [] },
+              {
+                name: 'img',
+                children: [
+                  { name: 'aldi-webshop-logo-colorful.png', children: [] },
+                ],
+              },
+            ],
+          },
+          { name: 'favicon.ico', children: [] },
+          { name: 'index.html', children: [] },
+          { name: 'main.server.ts', children: [] },
+          { name: 'main.ts', children: [] },
+          { name: 'server.ts', children: [] },
+          { name: 'styles.css', children: [] },
+        ],
+      };
+      var root = d3
+        .hierarchy(data)
+        .sum(function (d) {
+          var value = 1;
+          d.children.forEach(function (i) {
+            value += i.value;
+          });
+          return value;
+        })
+        .sort(function (a, b) {
+          return b.height - a.height || b.value - a.value;
+        });
 
+      var counter = 0;
+      root.each(function (d) {
+        d.id = counter++;
+      });
+      treemap(root);
 
-     var data = {"name":"/","children":[{"name":"app","children":[{"name":"app.component.ts","children":[]},{"name":"app.config.server.ts","children":[]},{"name":"app.config.ts","children":[]},{"name":"app.routes.ts","children":[]},{"name":"components","children":[{"name":"cart-content","children":[{"name":"cart-content.component.html","children":[]},{"name":"cart-content.component.spec.ts","children":[]},{"name":"cart-content.component.ts","children":[]}]},{"name":"cart-empty","children":[{"name":"cart-empty.component.html","children":[]},{"name":"cart-empty.component.ts","children":[]}]},{"name":"cart-indicator","children":[{"name":"cart-indicator.component.html","children":[]},{"name":"cart-indicator.component.spec.ts","children":[]},{"name":"cart-indicator.component.ts","children":[]}]},{"name":"cart-item-row","children":[{"name":"cart-item-row.component.html","children":[]},{"name":"cart-item-row.component.spec.ts","children":[]},{"name":"cart-item-row.component.ts","children":[]}]},{"name":"product-card","children":[{"name":"product-card.component.html","children":[]},{"name":"product-card.component.spec.ts","children":[]},{"name":"product-card.component.ts","children":[]}]}]},{"name":"pages","children":[{"name":"_layout","children":[{"name":"layout.component.css","children":[]},{"name":"layout.component.html","children":[]},{"name":"layout.component.spec.ts","children":[]},{"name":"layout.component.ts","children":[]}]},{"name":"_static","children":[{"name":"not-found","children":[{"name":"not-found.component.html","children":[]},{"name":"not-found.component.ts","children":[]}]}]},{"name":"cart","children":[{"name":"cart.component.html","children":[]},{"name":"cart.component.spec.ts","children":[]},{"name":"cart.component.ts","children":[]}]},{"name":"product-list","children":[{"name":"product-list.component.html","children":[]},{"name":"product-list.component.spec.ts","children":[]},{"name":"product-list.component.ts","children":[]}]}]},{"name":"services","children":[{"name":"product.service.spec.ts","children":[]},{"name":"product.service.ts","children":[]}]},{"name":"shared","children":[{"name":"directives","children":[{"name":"out-of-stock-overlay.directive.ts","children":[]},{"name":"product-fallback-image.directive.ts","children":[]}]},{"name":"interfaces","children":[{"name":"cart-item.interface.ts","children":[]},{"name":"nav-item.interface.ts","children":[]},{"name":"product.interface.ts","children":[]}]},{"name":"pipes","children":[{"name":"huf","children":[{"name":"huf.pipe.spec.ts","children":[]},{"name":"huf.pipe.ts","children":[]}]}]},{"name":"ui","children":[{"name":"icon-cart","children":[{"name":"icon-cart.component.html","children":[]},{"name":"icon-cart.component.ts","children":[]}]},{"name":"nav-item","children":[{"name":"nav-item.component.html","children":[]},{"name":"nav-item.component.spec.ts","children":[]},{"name":"nav-item.component.ts","children":[]}]},{"name":"product-skeleton","children":[{"name":"product-skeleton.component.htm","children":[]},{"name":"product-skeleton.component.ts","children":[]}]}]},{"name":"utils","children":[{"name":"product-utils.spec.ts","children":[]},{"name":"product.utils.ts","children":[]}]}]},{"name":"store","children":[{"name":"cart","children":[{"name":"cart.actions.ts","children":[]},{"name":"cart.reducer.ts","children":[]},{"name":"cart.selectors.ts","children":[]}]},{"name":"index.ts","children":[]},{"name":"stock","children":[{"name":"interfaces","children":[{"name":"stock-state.interface.ts","children":[]}]},{"name":"stock.actions.ts","children":[]},{"name":"stock.effects.ts","children":[]},{"name":"stock.reducer.ts","children":[]},{"name":"stock.selectors.ts","children":[]}]}]}]},{"name":"assets","children":[{"name":".gitkeep","children":[]},{"name":"img","children":[{"name":"aldi-webshop-logo-colorful.png","children":[]}]}]},{"name":"favicon.ico","children":[]},{"name":"index.html","children":[]},{"name":"main.server.ts","children":[]},{"name":"main.ts","children":[]},{"name":"server.ts","children":[]},{"name":"styles.css","children":[]}]}
-     var root = d3.hierarchy(data)
-                  .sum(function(d) {
-                      var value = 1;
-                      d.children.forEach(function(i){ value += i.value; })
-                      return value;
-                  })
-                  .sort(function(a, b) { return b.height - a.height || b.value - a.value; })
+      var cell = svg
+        .selectAll('.node')
+        .data(root.descendants())
+        .enter()
+        .append('g')
+        .attr('transform', function (d) {
+          return 'translate(' + d.x0 + ',' + d.y0 + ')';
+        })
+        .attr('class', 'node')
+        .each(function (d) {
+          d.node = this;
+        })
+        .on('mouseover', hovered(true))
+        .on('mouseout', hovered(false));
 
-     var counter = 0;
-     root.each(function(d){ d.id = counter++; })
-     treemap(root)
+      cell
+        .append('rect')
+        .attr('id', function (d) {
+          return 'rect-' + d.id;
+        })
+        .attr('width', function (d) {
+          return d.x1 - d.x0;
+        })
+        .attr('height', function (d) {
+          return d.y1 - d.y0;
+        })
+        .style('fill', function (d) {
+          return color(d.depth);
+        });
 
-     var cell = svg
-         .selectAll(".node")
-         .data(root.descendants())
-         .enter().append("g")
-         .attr("transform", function(d) { return "translate(" + d.x0 + "," + d.y0 + ")"; })
-         .attr("class", "node")
-         .each(function(d) { d.node = this; })
-         .on("mouseover", hovered(true))
-         .on("mouseout", hovered(false));
+      cell
+        .append('clipPath')
+        .attr('id', function (d) {
+          return 'clip-' + d.id;
+        })
+        .append('use')
+        .attr('xlink:href', function (d) {
+          return '#rect-' + d.id + '';
+        });
 
-     cell.append("rect")
-         .attr("id", function(d) { return "rect-" + d.id; })
-         .attr("width", function(d) { return d.x1 - d.x0; })
-         .attr("height", function(d) { return d.y1 - d.y0; })
-         .style("fill", function(d) { return color(d.depth); });
+      var label = cell.append('text').attr('clip-path', function (d) {
+        return 'url(#clip-' + d.id + ')';
+      });
 
-     cell.append("clipPath")
-         .attr("id", function(d) { return "clip-" + d.id; })
-         .append("use")
-         .attr("xlink:href", function(d) { return "#rect-" + d.id + ""; });
+      label
+        .filter(function (d) {
+          return d.children;
+        })
+        .selectAll('tspan')
+        .data(function (d) {
+          return [d.data.name];
+        })
+        .enter()
+        .append('tspan')
+        .attr('x', function (d, i) {
+          return i ? null : 4;
+        })
+        .attr('y', 13)
+        .text(function (d) {
+          return d;
+        });
 
-     var label = cell.append("text")
-                     .attr("clip-path", function(d) { return "url(#clip-" + d.id + ")"; });
+      label
+        .filter(function (d) {
+          return !d.children;
+        })
+        .selectAll('tspan')
+        .data(function (d) {
+          return [d.data.name];
+        })
+        .enter()
+        .append('tspan')
+        .attr('x', 4)
+        .attr('y', function (d, i) {
+          return 13 + i * 10;
+        })
+        .text(function (d) {
+          return d;
+        });
 
-     label
-         .filter(function(d) { return d.children; })
-         .selectAll("tspan")
-         .data(function(d) { return [d.data.name]; })
-         .enter().append("tspan")
-         .attr("x", function(d, i) { return i ? null : 4; })
-         .attr("y", 13)
-         .text(function(d) { return d; });
+      cell.append('title').text(function (d) {
+        return d.data.name;
+      });
 
-     label
-         .filter(function(d) { return !d.children; })
-         .selectAll("tspan")
-         .data(function(d) { return [d.data.name]; })
-         .enter().append("tspan")
-         .attr("x", 4)
-         .attr("y", function(d, i) { return 13 + i * 10; })
-         .text(function(d) { return d; });
-
-     cell.append("title")
-         .text(function(d) { return d.data.name; });
-
-     function hovered(hover) {
-         return function(d) {
-             d3.selectAll(d.ancestors().map(function(d) { return d.node; }))
-               .classed("node--hover", hover)
-               .select("rect")
-               .attr("width", function(d) { return d.x1 - d.x0 - hover; })
-               .attr("height", function(d) { return d.y1 - d.y0 - hover; });
-         };
-     }
-
+      function hovered(hover) {
+        return function (d) {
+          d3.selectAll(
+            d.ancestors().map(function (d) {
+              return d.node;
+            })
+          )
+            .classed('node--hover', hover)
+            .select('rect')
+            .attr('width', function (d) {
+              return d.x1 - d.x0 - hover;
+            })
+            .attr('height', function (d) {
+              return d.y1 - d.y0 - hover;
+            });
+        };
+      }
     </script>
   </head>
   <body></body>

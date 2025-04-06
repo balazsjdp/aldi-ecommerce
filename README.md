@@ -2,7 +2,8 @@
 
 A modern e-commerce application demo built with Angular 19, featuring a product list and a shopping cart using NgRx for state management.
 
-## ✨  Features
+## ✨ Features
+
 - Product list with grid layout
 - Cart management, minimum order quantity validation
 - Modern, responsive design with Tailwind
@@ -13,7 +14,6 @@ A modern e-commerce application demo built with Angular 19, featuring a product 
 ### Product List
 
 The `Product List` displays a responsive grid of product cards, handling both loading and stock states.
-
 
 - 🔄 Automatically dispatches a store action to **load products** if they haven't already been fetched.
 - 🛍️ Dynamically renders each product using the `ProductCardComponent`.
@@ -31,24 +31,27 @@ The `CartComponent` serves as the main **container view** for the shopping cart.
   - Action buttons for **Checkout**<em>(not implemented)</em> and **Continue Shopping**.
 - 🔁 Fully reactive using **NgRx Signals** — updates instantly on cart changes.
 
-
 ## 🚧 Possible Improvements
 
 This application was made as a technical "homework" task, but there are several areas where it could be expanded or hardened for real-world production use:
 
 ### End-to-End Testing
+
 - Integrate [Cypress](https://www.cypress.io/) or [Playwright](https://playwright.dev/) for complete E2E test coverage.
 - Simulate user flows such as "add to cart," "remove item," or "checkout flow."
 
 ### Docker & Containerization
+
 - Add a `Dockerfile` and optionally `docker-compose.yml` to containerize the app and enable deployment with consistent environments.
 - Useful for CI/CD pipelines and local development too.
 
 ### Cart Persistency (Local Storage)
+
 - Items added to the cart remain in the cart even after a full page reload.
 - The cart is rehydrated from local storage when the app starts.
 
 ### Code Quality Enhancements
+
 - Set up `husky` + `lint-staged` to enforce code style on every commit.
 - Add `commitlint` + semantic versioning.
 
@@ -63,10 +66,12 @@ This application was made as a technical "homework" task, but there are several 
 - **Prettier** for code formatting
 
 ## 🧱 Prerequisites
+
 - **Node.js** (Latest LTS version recommended, e.g. v18.x)
 - **npm** (comes with Node.js)
 
 ## 📦 Installation
+
 1. Clone the repository:
    `git clone https://github.com/balazsjdp/aldi-ecommerce`
 2. Navigate to the project directory: `cd aldi-ecommerce`
@@ -80,7 +85,6 @@ cd aldi-ecommerce-app
 npm install
 npm run start
 ```
-
 
 ## 🏗️ Build
 
@@ -97,7 +101,6 @@ Run `npm test` to execute the unit tests via Karma. The code coverage report is 
 ## 🗂️ Project Structure
 
 ![Directory Treemap](src/etc/directory-treemap.png)
-
 
 ```
 ├── app

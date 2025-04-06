@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  signal,
+} from '@angular/core';
 import {
   NavigationEnd,
   Router,
@@ -35,6 +40,7 @@ export class LayoutComponent {
   pageTitle = signal<string>('');
 
   constructor() {
+    // Set the page title based on the current route using Router events
     this._router.events
       .pipe(filter(event => event instanceof NavigationEnd))
       .subscribe(() => {
@@ -45,6 +51,7 @@ export class LayoutComponent {
       });
   }
 
+  // Define the navigation items for the application
   navigationItems: NavItem[] = [
     {
       label: 'Products',

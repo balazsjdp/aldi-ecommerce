@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  inject,
+} from '@angular/core';
 import { Store } from '@ngrx/store';
 import { selectCartTotalQuantity } from '../../store/cart/cart.selectors';
 import { RouterModule } from '@angular/router';
@@ -21,5 +26,6 @@ export class CartComponent {
   private _store = inject(Store);
   cartItemQuantity = this._store.selectSignal(selectCartTotalQuantity);
 
+  // A computed signal to check if the cart is empty
   readonly isCartEmpty = computed(() => this.cartItemQuantity() === 0);
 }

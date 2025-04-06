@@ -24,14 +24,19 @@ export class StockEffects {
   private store = inject(Store);
   private productService = inject(ProductService);
 
+  /**
+   * Effect: Loads products when `loadProducts` is dispatched,
+   * but only if stock hasn't been loaded yet.
+   * Adds a slight delay for skeleton animation. (Just for demonstration purposes)
+   */
   loadProducts$ = createEffect(() =>
     this.actions$.pipe(
       ofType(loadProducts),
       withLatestFrom(this.store.select(selectStock)),
-      filter(([, stock]) => !stock || stock.length === 0), // Load the products into the store only when they're not yet loaded
+      filter(([, stock]) => !stock || stock.length === 0),
       switchMap(() =>
         this.productService.getProducts().pipe(
-          delay(400), // Wanted to show the skeletons a bit, so added a delay :)
+          delay(400),
           map(products => loadProductsSuccess({ products })),
           catchError(error => of(loadProductsFail({ error })))
         )

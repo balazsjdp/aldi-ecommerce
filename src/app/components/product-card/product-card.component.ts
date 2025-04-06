@@ -1,4 +1,5 @@
 import {
+  ChangeDetectionStrategy,
   Component,
   computed,
   effect,
@@ -28,6 +29,7 @@ import { ProductFallbackImageDirective } from '../../shared/directives/product-f
   host: {
     class: 'relative',
   },
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProductCardComponent {
   private _store = inject(Store);
@@ -39,8 +41,8 @@ export class ProductCardComponent {
     });
   }
 
-  /* Signals */
 
+  // Holds the value of the product to be displayed
   product = input.required<Product>();
   // Holds the value of the quantity will be put in the cart
   quantity = signal<number>(1);
@@ -65,8 +67,6 @@ export class ProductCardComponent {
       ? 1
       : this.product().minOrderAmount || 1
   );
-
-  /* Event handlers */
 
   onQuantityInput(event: Event) {
     const input = event.target as HTMLInputElement;
@@ -96,7 +96,6 @@ export class ProductCardComponent {
     );
   }
 
-  /* Private methods */
   private sanitizeQuantityInput(value: number): number {
     return Math.max(this.minOrderAmount(), value);
   }

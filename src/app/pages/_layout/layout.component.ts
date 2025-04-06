@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import {
   NavigationEnd,
   Router,
@@ -28,6 +28,7 @@ const NOT_FOUND = 'Not Found';
   ],
   templateUrl: './layout.component.html',
   styleUrl: './layout.component.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LayoutComponent {
   private _router = inject(Router);

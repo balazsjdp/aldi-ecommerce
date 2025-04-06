@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import {
   selectCartItems,
@@ -16,6 +16,7 @@ import { HufPipe } from '../../shared/pipes/huf/huf.pipe';
   selector: 'app-cart-content',
   imports: [RouterModule, CartItemRowComponent, HufPipe],
   templateUrl: './cart-content.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CartContentComponent {
   private _store = inject(Store);

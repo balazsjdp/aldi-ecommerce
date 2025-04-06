@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { IconCartComponent } from '../../shared/ui/icon-cart/icon-cart.component';
 
@@ -11,5 +11,6 @@ import { IconCartComponent } from '../../shared/ui/icon-cart/icon-cart.component
   selector: 'app-cart-empty',
   imports: [RouterModule, IconCartComponent],
   templateUrl: './cart-empty.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CartEmptyComponent {}

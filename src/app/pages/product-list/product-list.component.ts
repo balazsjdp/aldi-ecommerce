@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { ProductCardComponent } from '../../components/product-card/product-card.component';
 import { ProductSkeletonComponent } from '../../shared/ui/product-skeleton/product-skeleton.component';
 import { Store } from '@ngrx/store';
@@ -22,6 +22,7 @@ import { OutOfStockOverlayDirective } from '../../shared/directives/out-of-stock
     OutOfStockOverlayDirective,
   ],
   templateUrl: './product-list.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProductListComponent {
   private _store = inject(Store);

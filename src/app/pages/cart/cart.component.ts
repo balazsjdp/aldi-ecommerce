@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { selectCartTotalQuantity } from '../../store/cart/cart.selectors';
 import { RouterModule } from '@angular/router';
@@ -15,8 +15,11 @@ import { CartContentComponent } from '../../components/cart-content/cart-content
   standalone: true,
   imports: [RouterModule, CartEmptyComponent, CartContentComponent],
   templateUrl: './cart.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CartComponent {
   private _store = inject(Store);
   cartItemQuantity = this._store.selectSignal(selectCartTotalQuantity);
+
+  readonly isCartEmpty = computed(() => this.cartItemQuantity() === 0);
 }

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { RouterModule, RouterLinkActive } from '@angular/router';
 
 const UNKNOWN_ROUTE = 'UNKNOWN_ROUTE';
@@ -16,6 +16,7 @@ const UNKNOWN_ROUTE = 'UNKNOWN_ROUTE';
   standalone: true,
   imports: [RouterModule, RouterLinkActive],
   templateUrl: './nav-item.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NavItemComponent {
   @Input({ required: true }) routerLink!: string;

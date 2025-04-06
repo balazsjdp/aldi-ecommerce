@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
 /**
  * IconCartComponent renders a reusable SVG cart icon.
@@ -11,6 +11,7 @@ import { Component, Input } from '@angular/core';
   selector: 'app-icon-cart',
   imports: [],
   templateUrl: './icon-cart.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class IconCartComponent {
   @Input() class = 'w-16 h-16 text-gray-400 mb-4';

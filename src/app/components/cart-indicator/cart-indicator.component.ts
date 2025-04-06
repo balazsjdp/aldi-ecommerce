@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { selectCartItemsDistinctQuantity } from '../../store/cart/cart.selectors';
 import { IconCartComponent } from '../../shared/ui/icon-cart/icon-cart.component';
@@ -13,6 +13,7 @@ import { RouterModule } from '@angular/router';
   selector: 'app-cart-indicator',
   imports: [IconCartComponent, RouterModule],
   templateUrl: './cart-indicator.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CartIndicatorComponent {
   private _store = inject(Store);

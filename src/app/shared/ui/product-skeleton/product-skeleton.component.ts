@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 /**
  * ProductSkeletonComponent displays a skeleton UI placeholder while product data is loading.
@@ -10,5 +10,6 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [],
   templateUrl: './product-skeleton.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProductSkeletonComponent {}

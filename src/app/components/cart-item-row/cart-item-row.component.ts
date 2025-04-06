@@ -1,4 +1,4 @@
-import { Component, computed, inject, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, input } from '@angular/core';
 import CartItem from '../../shared/interfaces/cart-item.interface';
 import { Store } from '@ngrx/store';
 import { removeFromCart } from '../../store/cart/cart.actions';
@@ -15,6 +15,7 @@ import { ProductFallbackImageDirective } from '../../shared/directives/product-f
   standalone: true,
   imports: [HufPipe, ProductFallbackImageDirective],
   templateUrl: './cart-item-row.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CartItemRowComponent {
   private _store = inject(Store);

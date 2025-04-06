@@ -6,7 +6,7 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test",
+    "test": "ng test --code-coverage",
     "serve:ssr:aldi-ecommerce": "node dist/aldi-ecommerce/server/server.mjs",
     "lint": "ng lint",
     "format": "prettier --write ."

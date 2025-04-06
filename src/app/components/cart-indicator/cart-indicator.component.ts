@@ -4,6 +4,11 @@ import { selectCartItemsDistinctQuantity } from '../../store/cart/cart.selectors
 import { IconCartComponent } from '../../shared/ui/icon-cart/icon-cart.component';
 import { RouterModule } from '@angular/router';
 
+/**
+ * CartIndicatorComponent displays a cart icon with a badge showing the number
+ * of distinct items currently in the user's cart.
+ * It also takes the user to the /cart page when clicked.
+ */
 @Component({
   selector: 'app-cart-indicator',
   imports: [IconCartComponent, RouterModule],

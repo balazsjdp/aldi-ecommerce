@@ -26,7 +26,7 @@ describe('CartContentComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [CartContentComponent, MockCartItemRowComponent], // Move MockCartItemRowComponent to imports
+      imports: [CartContentComponent, MockCartItemRowComponent],
       providers: [provideMockStore(), provideRouter([])],
     }).compileComponents();
 
@@ -38,7 +38,7 @@ describe('CartContentComponent', () => {
   it('should create the component', () => {
     expect(component).toBeTruthy();
   });
-  
+
   it('should initialize cartItems with the value from selectCartItems', () => {
     const mockCartItems: CartItem[] = [
       {

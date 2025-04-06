@@ -5,6 +5,11 @@ import { removeFromCart } from '../../store/cart/cart.actions';
 import { HufPipe } from '../../shared/pipes/huf/huf.pipe';
 import { ProductFallbackImageDirective } from '../../shared/directives/product-fallback-image.directive';
 
+/**
+ * CartItemRowComponent represents a single row in the shopping cart list.
+ * It displays product image, name, quantity, subtotal, and includes a button
+ * to remove the item from the cart.
+ */
 @Component({
   selector: 'app-cart-item-row',
   standalone: true,

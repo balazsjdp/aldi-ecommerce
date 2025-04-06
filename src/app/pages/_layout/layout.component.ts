@@ -11,6 +11,12 @@ import { filter } from 'rxjs/operators';
 import { CartIndicatorComponent } from '../../components/cart-indicator/cart-indicator.component';
 
 const NOT_FOUND = 'Not Found';
+
+/**
+ * LayoutComponent is the main structural shell of the application.
+ * It defines the navigation bar, header (with dynamic page titles),
+ * and the main content area that loads routed pages via RouterOutlet.
+ */
 @Component({
   selector: 'app-layout',
   standalone: true,

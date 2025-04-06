@@ -3,6 +3,14 @@ import { RouterModule, RouterLinkActive } from '@angular/router';
 
 const UNKNOWN_ROUTE = 'UNKNOWN_ROUTE';
 
+/**
+ * NavItemComponent renders a single navigation link with active state styling.
+ * It is used within a navigation bar and highlights the active route.
+ * It routes to the specified path when clicked.
+ *
+ * Usage example:
+ *   <app-nav-item routerLink="/products" label="Products" />
+ */
 @Component({
   selector: 'app-nav-item',
   standalone: true,

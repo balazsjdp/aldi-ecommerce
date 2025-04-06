@@ -2,6 +2,16 @@ import { Directive, effect, ElementRef, inject, Input } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { selectRemainingAmount } from '../../store/stock/stock.selectors';
 
+/**
+ * OutOfStockOverlayDirective visually overlays an "Out of stock" label and blur effect
+ * on any host element (planeed to be used with ProductCardComponent) if the product is out of stock.
+ *
+ * Usage:
+ *   <div [appOutOfStockOverlay]="product.id"></div>
+ *
+ * Dynamically adds DOM elements to indicate out-of-stock status by checking
+ * the remaining quantity in store via selector.
+ */
 @Directive({
   selector: '[appOutOfStockOverlay]',
   standalone: true,
@@ -21,6 +31,7 @@ export class OutOfStockOverlayDirective {
       const hostEl = this._el.nativeElement;
       hostEl.classList.add('relative');
 
+      // Create two elements. The first is a blurred overlay, the second is a label that shows "Out of stock"
       const elementsToCreate = [
         {
           type: 'div',

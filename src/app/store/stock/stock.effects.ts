@@ -31,7 +31,7 @@ export class StockEffects {
       filter(([, stock]) => !stock || stock.length === 0), // Load the products into the store only when they're not yet loaded
       switchMap(() =>
         this.productService.getProducts().pipe(
-          delay(800), // Wanted to show the skeletons a bit, so added a delay :)
+          delay(400), // Wanted to show the skeletons a bit, so added a delay :)
           map(products => loadProductsSuccess({ products })),
           catchError(error => of(loadProductsFail({ error })))
         )

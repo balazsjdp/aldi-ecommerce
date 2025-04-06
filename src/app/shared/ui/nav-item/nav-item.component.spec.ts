@@ -15,7 +15,7 @@ describe('NavItemComponent', () => {
     fixture = TestBed.createComponent(NavItemComponent);
     component = fixture.componentInstance;
   });
-  
+
   it('should create the component', () => {
     expect(component).toBeTruthy();
   });

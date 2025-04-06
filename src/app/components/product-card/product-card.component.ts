@@ -15,6 +15,11 @@ import { ToastrService } from 'ngx-toastr';
 import { HufPipe } from '../../shared/pipes/huf/huf.pipe';
 import { ProductFallbackImageDirective } from '../../shared/directives/product-fallback-image.directive';
 
+/**
+ * ProductCardComponent displays a single product with its image, name, price,
+ * and an input for setting the desired quantity. It allows users to add products to the cart.
+ * It also handles logic for validating quantities and available stock.
+ */
 @Component({
   selector: 'app-product-card',
   standalone: true,

@@ -8,6 +8,10 @@ import { CartItemRowComponent } from '../cart-item-row/cart-item-row.component';
 import { RouterModule } from '@angular/router';
 import { HufPipe } from '../../shared/pipes/huf/huf.pipe';
 
+/**
+ * The CartContentComponent is responsible for displaying the items in the shopping cart in case there are any.
+ * It also displays the subtotal of the cart.
+ */
 @Component({
   selector: 'app-cart-content',
   imports: [RouterModule, CartItemRowComponent, HufPipe],

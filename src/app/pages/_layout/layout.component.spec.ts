@@ -19,8 +19,12 @@ describe('LayoutComponent', () => {
     mockRouter = {
       events: routerEvents$.asObservable(),
       url: '/products',
-      createUrlTree: jasmine.createSpy('createUrlTree').and.callFake((commands: any[]) => commands),
-      serializeUrl: jasmine.createSpy('serializeUrl').and.callFake((url: any) => url.toString()),
+      createUrlTree: jasmine
+        .createSpy('createUrlTree')
+        .and.callFake((commands: any[]) => commands),
+      serializeUrl: jasmine
+        .createSpy('serializeUrl')
+        .and.callFake((url: any) => url.toString()),
     };
 
     const mockActivatedRoute = {
@@ -30,7 +34,7 @@ describe('LayoutComponent', () => {
         queryParams: {},
         fragment: '',
         url: [],
-      }
+      },
     };
 
     await TestBed.configureTestingModule({
@@ -56,14 +60,14 @@ describe('LayoutComponent', () => {
     fixture.detectChanges();
     expect(component.pageTitle()).toBe('Products');
 
-    Object.defineProperty(mockRouter, 'url', {get: () => '/cart'});
+    Object.defineProperty(mockRouter, 'url', { get: () => '/cart' });
     routerEvents$.next(new NavigationEnd(2, '/cart', '/cart'));
     fixture.detectChanges();
     expect(component.pageTitle()).toBe('Cart');
   });
 
   it('should set pageTitle to NOT_FOUND when route does not match any navigation item', () => {
-    Object.defineProperty(mockRouter, 'url', {get: () => '/unknown'});
+    Object.defineProperty(mockRouter, 'url', { get: () => '/unknown' });
     routerEvents$.next(new NavigationEnd(3, '/unknown', '/unknown'));
     fixture.detectChanges();
     expect(component.pageTitle()).toBe('Not Found');
@@ -77,30 +81,36 @@ describe('LayoutComponent', () => {
   });
 
   it('should render navigation items in the template', () => {
-    const navItems = fixture.debugElement.queryAll(By.directive(NavItemComponent));
+    const navItems = fixture.debugElement.queryAll(
+      By.directive(NavItemComponent)
+    );
     expect(navItems.length).toBe(component.navigationItems.length);
-    
+
     navItems.forEach((item, index) => {
       const navItemComponent = item.componentInstance as NavItemComponent;
-      expect(navItemComponent.routerLink).toBe(component.navigationItems[index].routerLink);
-      expect(navItemComponent.label).toBe(component.navigationItems[index].label);
+      expect(navItemComponent.routerLink).toBe(
+        component.navigationItems[index].routerLink
+      );
+      expect(navItemComponent.label).toBe(
+        component.navigationItems[index].label
+      );
     });
   });
 
   it('should display page title in the template', () => {
     routerEvents$.next(new NavigationEnd(1, '/products', '/products'));
     fixture.detectChanges();
-    
+
     const titleElement = fixture.debugElement.query(By.css('h1'));
     expect(titleElement).toBeTruthy();
     expect(titleElement.nativeElement.textContent).toContain('Products');
   });
 
   it('should display "Not Found" in the template when navigating to /asd route', () => {
-    Object.defineProperty(mockRouter, 'url', {get: () => '/asd'});
+    Object.defineProperty(mockRouter, 'url', { get: () => '/asd' });
     routerEvents$.next(new NavigationEnd(4, '/asd', '/asd'));
     fixture.detectChanges();
-    
+
     const titleElement = fixture.debugElement.query(By.css('h1'));
     expect(titleElement).toBeTruthy();
     expect(titleElement.nativeElement.textContent).toContain('Not Found');

@@ -9,6 +9,10 @@ import {
 } from '../../store/stock/stock.selectors';
 import { OutOfStockOverlayDirective } from '../../shared/directives/out-of-stock-overlay.directive';
 
+/**
+ * ProductListComponent displays a grid of product cards, (or loading skeletons if data is being loaded).
+ * It automatically dispatches an action to load products if they haven't been fetched already.
+ */
 @Component({
   selector: 'app-product-list',
   standalone: true,

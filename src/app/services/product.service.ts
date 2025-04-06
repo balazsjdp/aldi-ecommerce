@@ -5,6 +5,10 @@ import { map, Observable } from 'rxjs';
 import Product from '../shared/interfaces/product.interface';
 import ProductUtils from '../shared/utils/product.utils';
 
+/**
+ * ProductService handles the HTTP interactions related to product data.
+ * It communicates with a mock API to fetch the product list
+ */
 @Injectable({
   providedIn: 'root',
 })
@@ -14,6 +18,13 @@ export class ProductService {
 
   constructor(private http: HttpClient) {}
 
+  /**
+   * Fetches the list of all products from the API.
+   * The result is transformed using a utility function to ensure each product has a unique ID,
+   * due to the API returning duplicated IDs.
+   *
+   * @returns {Observable<Product[]>} - A stream of products with corrected unique IDs.
+   */
   getProducts(): Observable<Product[]> {
     return this.http.get<Product[]>(this.apiUrl).pipe(
       map(
@@ -21,9 +32,5 @@ export class ProductService {
           products.map((p: Product) => ProductUtils.productWithUid(p)) // The provided API has an ID duplication. Here I assign new unique ids for each product
       )
     );
-  }
-
-  getProductById(id: string): Observable<Product> {
-    return this.http.get<Product>(`${this.apiUrl}/${id}`);
   }
 }

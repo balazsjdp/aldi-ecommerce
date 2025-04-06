@@ -6,6 +6,15 @@ import {
   Input,
 } from '@angular/core';
 
+/**
+ * ProductFallbackImageDirective provides a fallback mechanism for broken image URLs.
+ * It replaces the image source with a placeholder image that includes the provided fallback text.
+ *
+ * Usage:
+ *   <img [src]="product.img" [appFallbackImage]="product.name" />
+ *
+ * If the image fails to load, a placeholder will be shown instead with the provided product's name (or 'Not Found' by default) displayed.
+ */
 @Directive({
   selector: 'img[appFallbackImage]',
   standalone: true,

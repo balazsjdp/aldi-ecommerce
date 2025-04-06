@@ -1,9 +1,9 @@
 # ALDI e-commerce application
 
-A modern e-commerce application demo built with Angular 19, featuring a product catalog and a shopping cart using NgRx for state management.
+A modern e-commerce application demo built with Angular 19, featuring a product list and a shopping cart using NgRx for state management.
 
 ## ✨  Features
-- Product catalog with grid layout
+- Product list with grid layout
 - Cart management, minimum order quantity validation
 - Modern, responsive design with Tailwind
 - Stock management
@@ -36,23 +36,23 @@ The `CartComponent` serves as the main **container view** for the shopping cart.
 
 This application was made as a technical "homework" task, but there are several areas where it could be expanded or hardened for real-world production use:
 
-### 🧪 End-to-End Testing
+### End-to-End Testing
 - Integrate [Cypress](https://www.cypress.io/) or [Playwright](https://playwright.dev/) for complete E2E test coverage.
 - Simulate user flows such as "add to cart," "remove item," or "checkout flow."
 
-### 🐳 Docker & Containerization
+### Docker & Containerization
 - Add a `Dockerfile` and optionally `docker-compose.yml` to containerize the app and enable deployment with consistent environments.
 - Useful for CI/CD pipelines and local development too.
 
-### 💾 Cart Persistency (Local Storage)
+### Cart Persistency (Local Storage)
 - Items added to the cart remain in the cart even after a full page reload.
 - The cart is rehydrated from local storage when the app starts.
 
-### 🧹 Code Quality Enhancements
+### Code Quality Enhancements
 - Set up `husky` + `lint-staged` to enforce code style on every commit.
 - Add `commitlint` + semantic versioning.
 
-## Technologies
+## 🧰 Technologies
 
 - **Angular** @19.2
 - **TypeScript** @5.7
@@ -62,11 +62,11 @@ This application was made as a technical "homework" task, but there are several 
 - **ESLint** for linting
 - **Prettier** for code formatting
 
-## Prerequisites
+## 🧱 Prerequisites
 - **Node.js** (Latest LTS version recommended, e.g. v18.x)
 - **npm** (comes with Node.js)
 
-## Installation
+## 📦 Installation
 1. Clone the repository:
    `git clone [repository-url]`
 2. Navigate to the project directory: `cd aldi-ecommerce`
@@ -82,19 +82,19 @@ npm run start
 ```
 
 
-## Build
+## 🏗️ Build
 
 Run `npm run build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
-## Running with SSR
+## 🌐 Running with SSR
 
 Run `npm run serve:ssr:aldi-ecommerce` to run the application with server-side rendering (SSR).
 
-## Running Tests
+## ✅ Running Tests
 
 Run `npm test` to execute the unit tests via Karma. The code coverage report is created in the `/coverage` folder.
 
-## Project Structure
+## 🗂️ Project Structure
 
 ![Directory Treemap](src/etc/directory-treemap.png)
 

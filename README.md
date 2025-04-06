@@ -68,7 +68,7 @@ This application was made as a technical "homework" task, but there are several 
 
 ## 📦 Installation
 1. Clone the repository:
-   `git clone [repository-url]`
+   `git clone https://github.com/balazsjdp/aldi-ecommerce`
 2. Navigate to the project directory: `cd aldi-ecommerce`
 3. Install dependencies: `npm install`
 

@@ -42,6 +42,11 @@ The `CartComponent` serves as the main **container view** for the shopping cart.
 
 This application was made as a technical "homework" task, but there are several areas where it could be expanded or hardened for real-world production use:
 
+### Input validation
+
+- The input field on the product card could be validated (e.g: Using a custom validator to validate the entered value by taking the current stock into account) and sanitized to enhance security and stability of the application.
+- Implementing proper input constraints (e.g. type restriction in this case) would reduce the risk of invalid data submission.
+
 ### End-to-End Testing
 
 - Integrate [Cypress](https://www.cypress.io/) or [Playwright](https://playwright.dev/) for complete E2E test coverage.

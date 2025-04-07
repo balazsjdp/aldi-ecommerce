@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { map, Observable } from 'rxjs';
@@ -13,10 +13,9 @@ import ProductUtils from '../shared/utils/product.utils';
   providedIn: 'root',
 })
 export class ProductService {
+  private _http = inject(HttpClient);
   private readonly apiUrl =
     'https://63c10327716562671870f959.mockapi.io/products';
-
-  constructor(private http: HttpClient) {}
 
   /**
    * Fetches the list of all products from the API.
@@ -26,7 +25,7 @@ export class ProductService {
    * @returns {Observable<Product[]>} - A stream of products with corrected unique IDs.
    */
   getProducts(): Observable<Product[]> {
-    return this.http.get<Product[]>(this.apiUrl).pipe(
+    return this._http.get<Product[]>(this.apiUrl).pipe(
       map(
         (products: Product[]) =>
           products.map((p: Product) => ProductUtils.productWithUid(p)) // The provided API has an ID duplication. Here I assign new unique ids for each product

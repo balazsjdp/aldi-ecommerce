@@ -47,6 +47,9 @@ This application was made as a technical "homework" task, but there are several 
 - The input field on the product card could be validated (e.g: Using a custom validator to validate the entered value by taking the current stock into account) and sanitized to enhance security and stability of the application.
 - Implementing proper input constraints (e.g. type restriction in this case) would reduce the risk of invalid data submission.
 
+### NGRX
+- Use `@ngrx/signals` instead of `@ngrx/store`
+
 ### End-to-End Testing
 
 - Integrate [Cypress](https://www.cypress.io/) or [Playwright](https://playwright.dev/) for complete E2E test coverage.

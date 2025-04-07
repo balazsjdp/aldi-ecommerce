@@ -2,6 +2,13 @@
 
 A modern e-commerce application demo built with Angular 19, featuring a product list and a shopping cart using NgRx for state management.
 
+## ✅ Acceptance criteria
+
+- [x] Create two different pages /products and /cart
+- [x] The Product page lists all products and their information, and enables adding each individual product to cart in various amounts, with respect to minOrderAmount.
+- [x] When product is added to cart its available amount should be decremented by the amount added. Adding more than the total amount should not be possible.
+- [x] Cart page displays the products added to the cart: total amount currently added, total price.
+
 ## ✨ Features
 
 - Product list with grid layout

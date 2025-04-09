@@ -28,8 +28,8 @@ export class OutOfStockOverlayDirective {
         selectRemainingAmount(this.appOutOfStockOverlay)
       );
 
-      const hostEl = this._el.nativeElement;
-      hostEl.classList.add('relative');
+      const hostEl = this._el.nativeElement; // TODO: Use Renderer2 instead of nativeElement
+      hostEl.classList.add('relative'); 
 
       // Create two elements. The first is a blurred overlay, the second is a label that shows "Out of stock"
       const elementsToCreate = [

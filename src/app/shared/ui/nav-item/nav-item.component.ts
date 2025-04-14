@@ -13,7 +13,6 @@ const UNKNOWN_ROUTE = 'UNKNOWN_ROUTE';
  */
 @Component({
   selector: 'app-nav-item',
-  standalone: true,
   imports: [RouterModule, RouterLinkActive],
   templateUrl: './nav-item.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,

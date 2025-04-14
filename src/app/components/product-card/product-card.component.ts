@@ -23,7 +23,6 @@ import { ProductFallbackImageDirective } from '../../shared/directives/product-f
  */
 @Component({
   selector: 'app-product-card',
-  standalone: true,
   imports: [HufPipe, ProductFallbackImageDirective],
   templateUrl: './product-card.component.html',
   host: {

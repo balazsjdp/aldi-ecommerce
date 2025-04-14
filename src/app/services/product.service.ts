@@ -25,7 +25,7 @@ export class ProductService {
    * @returns {Observable<Product[]>} - A stream of products with corrected unique IDs.
    */
   getProducts(): Observable<Product[]> {
-    return this._http.get<Product[]>(this.apiUrl).pipe(
+    return this._http.get<Product[]>(this.apiUrl).pipe( // May update to the resource API: https://angular.dev/api/core/Resource
       map(
         (products: Product[]) =>
           products.map((p: Product) => ProductUtils.productWithUid(p)) // The provided API has an ID duplication. Here I assign new unique ids for each product

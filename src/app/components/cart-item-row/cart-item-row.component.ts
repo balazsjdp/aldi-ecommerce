@@ -18,7 +18,6 @@ import { ProductFallbackImageDirective } from '../../shared/directives/product-f
  */
 @Component({
   selector: 'app-cart-item-row',
-  standalone: true,
   imports: [HufPipe, ProductFallbackImageDirective],
   templateUrl: './cart-item-row.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,

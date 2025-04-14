@@ -8,7 +8,7 @@ export const routes: Routes = [
     path: '',
     component: LayoutComponent,
     children: [
-      { path: 'products', component: ProductListComponent },
+      { path: 'products', component: ProductListComponent },  // May use ServerRoute so that the server can pre-render the page with the products
       { path: 'cart', component: CartComponent },
       { path: '', redirectTo: 'products', pathMatch: 'full' },
       {

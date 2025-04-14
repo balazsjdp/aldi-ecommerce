@@ -17,7 +17,6 @@ import {
  */
 @Directive({
   selector: 'img[appFallbackImage]',
-  standalone: true,
 })
 export class ProductFallbackImageDirective {
   private _el = inject(ElementRef<HTMLElement>);

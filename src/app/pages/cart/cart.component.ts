@@ -17,7 +17,6 @@ import { CartContentComponent } from '../../components/cart-content/cart-content
  */
 @Component({
   selector: 'app-cart',
-  standalone: true,
   imports: [RouterModule, CartEmptyComponent, CartContentComponent],
   templateUrl: './cart.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,

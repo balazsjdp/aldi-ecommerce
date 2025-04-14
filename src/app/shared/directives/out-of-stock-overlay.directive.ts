@@ -14,7 +14,6 @@ import { selectRemainingAmount } from '../../store/stock/stock.selectors';
  */
 @Directive({
   selector: '[appOutOfStockOverlay]',
-  standalone: true,
 })
 export class OutOfStockOverlayDirective {
   private _store = inject(Store);

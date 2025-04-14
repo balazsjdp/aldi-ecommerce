@@ -13,7 +13,7 @@ import { provideToastr } from 'ngx-toastr';
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
-    provideClientHydration(),
+    provideClientHydration(), // For SSR. May upgrade with withIncrementalHydration() from A19 (eventReplay is enabled by default)
     provideHttpClient(withFetch()),
     provideEffects(StockEffects),
     provideAnimations(),

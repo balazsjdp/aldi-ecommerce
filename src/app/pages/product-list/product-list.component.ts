@@ -20,7 +20,6 @@ import { OutOfStockOverlayDirective } from '../../shared/directives/out-of-stock
  */
 @Component({
   selector: 'app-product-list',
-  standalone: true,
   imports: [
     ProductCardComponent,
     ProductSkeletonComponent,

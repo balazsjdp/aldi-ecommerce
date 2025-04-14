@@ -12,7 +12,6 @@ import { provideRouter } from '@angular/router';
 
 @Component({
   selector: 'app-cart-item-row',
-  standalone: true,
   template: '<div>{{ item?.name }}</div>',
 })
 class MockCartItemRowComponent {
